@@ -1,6 +1,6 @@
 ﻿namespace eTickets.Models
 {
-    public class Actors_Movies
+    public class Actor_Movie
     {
         public int MovieId { get; set; }
         public Movie Movie { get; set; }
