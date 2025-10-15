@@ -13,8 +13,8 @@ namespace eTickets.Controllers
         }
         public async Task <IActionResult> Index()
         {
-            var data = _context.Actors.ToListAsync();
-            return View();
+            var data = _context.Cinemas.ToListAsync();
+            return View(data);
         }
     }
 }
