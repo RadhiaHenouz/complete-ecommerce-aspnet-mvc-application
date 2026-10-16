@@ -1,0 +1,17 @@
+﻿
+@model Actor
+                <form asp-action="Delete" asp-controller="Actors"
+                      method="post">
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="mb-3">
+                        Are you sure you want to delete @Model.FullName ?
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Delete
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel </button>
+                </form>
+            

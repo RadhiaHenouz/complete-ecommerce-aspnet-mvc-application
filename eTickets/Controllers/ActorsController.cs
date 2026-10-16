@@ -55,13 +55,15 @@ namespace eTickets.Controllers
 
             string fileName = Path.GetFileName(postedFile.FileName);
             string imageUrl = "/"+folderName+"/" + fileName;
-            using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+            if (!Directory.Exists(imageUrl))
+            {
+                using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
                 {
                     postedFile.CopyTo(stream);
-                    imageUrl = "Uploads/" + fileName;
                     actor.ProfilePictureURL = imageUrl;
 
                 }
+            }
             if (!ModelState.IsValid)
             {
                 return View(actor);
@@ -69,12 +71,54 @@ namespace eTickets.Controllers
             _service.AddAsync(actor);
             return RedirectToAction(nameof(Index));
         }
+        //Get Actors/Edit
+        public async Task<IActionResult> Edit(int id )
+        {
+
+            var actorDetails = await _service.GetByIdAsync(id);
+            if (actorDetails == null) return View("Not found");
+            return View(actorDetails);
+          
+        }
+
+        //Post 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id ,[Bind("id","ProfilePictureURL", "FullName", "Bio")] Actor actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+            await _service.UpdateAsync(id,actor);
+            return RedirectToAction(nameof(Index));
+        }
         [HttpGet]
         public async Task <IActionResult> Details (int id )
         {
             var actorDetails = await _service.GetByIdAsync(id);
-            if (actorDetails == null) return View("Empty");
+            if (actorDetails == null) return View("NotFound");
             return View (actorDetails);
+        }
+        //Get Actors/Edit
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            var actorDetails = await _service.GetByIdAsync(id);
+            if (actorDetails == null) return View("Not found");
+            return PartialView(actorDetails);
+
+        }
+        [HttpPost ,ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var actorDetails=await _service.GetByIdAsync(id); 
+            if(actorDetails!=null) 
+           
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
