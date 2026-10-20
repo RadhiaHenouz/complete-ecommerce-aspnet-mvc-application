@@ -28,17 +28,16 @@
                                 asp-action="Index"><i class="badge-info bi-film"></i>Movies</a></li>
 
                         <li class="nav-item dropdown flex-grow-1">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="navbarDropdown"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown link</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"><i
+                                 <a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"><i
                                             class="bi bi-camera-reels"></i> Cinemas</a></li>
-                                <li><a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i
-                                            class="bi bi-headset"></i> Actors</a></li>
-                                <li><a class="dropdown-item" asp-controller="Producers" asp-action="Index"><i
-                                            class="bi bi-person-square"></i> Producers</a></li>
-                            </ul>
-                        </li>
+
+                        <li class="nav-item dropdown flex-grow-1">
+                            <a class="dropdown-item" asp-controller="Actors" asp-action="Index">
+                                <i class="bi bi-headset"></i> Actors</a></li>
+                        <li class ="nav-item dropdown flex-grow-1">
+                            <a class="dropdown-item" asp-controller="Producers" asp-action="Index">
+                                <i class="bi bi-person-square"></i> Producers</a></li>
+                         
                     </ul>
                     <form class="form-inline" asp-controller="Movies" asp-action="Filter" method="get">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search for a movie"

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using eTickets.Data.Services;
+using eTickets.Data.Base;
 
 namespace eTickets
 {
@@ -32,6 +33,7 @@ namespace eTickets
 
             //Services configuration
             services.AddScoped<IActorsService, ActorsService>();
+            services.AddScoped<IProducersService, ProducersService>();
             services.AddControllersWithViews();
 
         }
